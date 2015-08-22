@@ -12,16 +12,18 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "precise64"
+  config.vm.box = "ubuntu/trusty64"
 
-  # The url from where the 'config.vm.box' box will be fetched if it
-  # doesn't already exist on the user's system.
-  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+  # Disable automatic box update checking. If you disable this, then
+  # boxes will only be checked for updates when the user runs
+  # `vagrant box outdated`. This is not recommended.
+  # config.vm.box_check_update = false
 
   # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing "localhost:8080" will access port 80 on the guest machine.
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
+  # within the machine from a port on the host machine.
+  # We forward port 8080 on the host to port 8080 on the guest for the
+  # Jenkins Web UI.
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
 
   # Run a bash script to provision our VM with PHPUnit, etc.  
   config.vm.provision "shell", path: "provision.sh"

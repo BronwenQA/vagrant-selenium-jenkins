@@ -13,8 +13,11 @@ mv phpunit.phar /usr/local/bin/phpunit
 
 echo "Installing Jenkins..."
 wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
-sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list' >/dev/null 2>&1
+sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
 apt-get update >/dev/null 2>&1
 apt-get install -y jenkins >/dev/null 2>&1
+
+echo "Starting Jenkins..."
+/etc/init.d/jenkins start
 #rm -rf /var/www
 #ln -fs /vagrant /var/www
