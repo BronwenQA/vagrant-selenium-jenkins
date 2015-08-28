@@ -11,6 +11,10 @@ wget https://phar.phpunit.de/phpunit.phar >/dev/null 2>&1
 chmod +x phpunit.phar >/dev/null 2>&1
 mv phpunit.phar /usr/local/bin/phpunit 
 
+# Using instructions from http://pietervogelaar.nl/ubuntu-14-04-install-selenium-as-service-headless
+echo "Installing Firefox and xvfb"
+apt-get install -y firefox xvfb
+
 echo "Installing Jenkins..."
 wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
 sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
