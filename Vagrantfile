@@ -24,6 +24,9 @@ Vagrant.configure(2) do |config|
   # We forward port 8080 on the host to port 8080 on the guest for the
   # Jenkins Web UI.
   config.vm.network "forwarded_port", guest: 8080, host: 8080
+  # We forward port 4444 on the host to port 4444 on the guest for the
+  # Selenium driver.
+  config.vm.network "forwarded_port", guest: 4444, host: 4444
 
   # Run a bash script to provision our VM with PHPUnit, etc.  
   config.vm.provision "shell", path: "provision.sh"
