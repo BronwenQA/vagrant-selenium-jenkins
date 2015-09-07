@@ -26,6 +26,9 @@ sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list
 apt-get update >/dev/null 2>&1
 apt-get install -y jenkins >/dev/null 2>&1
 
+echo "Installing git..."
+apt-get install -y git >/dev/null 2>&1
+
 echo "Starting Xvfb..."
 export DISPLAY=:10
 Xvfb :10 -screen 0 1024x768x8 -ac &
