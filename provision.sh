@@ -46,17 +46,10 @@ nohup java -jar  /usr/local/bin/selenium-server-standalone.jar &
 
 echo "Starting Jenkins..."
 /etc/init.d/jenkins start
-# The plugins directory might not exist. Wait for 30 seconds if it
-# doesn't exist
-#if [ ! -e /var/cache/jenkins/war/WEB-INF/plugins ];
-#then
-#    sleep 30
-#fi
-# Move the downloaded plugins (git, etc)
+# Wait 1 minute for Jenkins to start
 sleep 60
 echo "Moving Jenkins plugins..."
 chown jenkins:jenkins *.hpi
 mv *.hpi /var/cache/jenkins/war/WEB-INF/plugins
-sleep 60
 /etc/init.d/jenkins restart
 
