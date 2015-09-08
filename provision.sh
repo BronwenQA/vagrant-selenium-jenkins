@@ -20,14 +20,19 @@ echo "Downloading Selenium..."
 wget http://selenium-release.storage.googleapis.com/2.47/selenium-server-standalone-2.47.1.jar >/dev/null 2>&1
 mv selenium-server-standalone-2.47.1.jar /usr/local/bin/selenium-server-standalone.jar
 
+echo "Installing git..."
+apt-get install -y git >/dev/null 2>&1
+
 echo "Installing Jenkins..."
 wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
 sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
 apt-get update >/dev/null 2>&1
 apt-get install -y jenkins >/dev/null 2>&1
 
-echo "Installing git..."
-apt-get install -y git >/dev/null 2>&1
+echo "Installing Jenkins plugins..."
+wget http://updates.jenkins-ci.org/latest/scm-api.hpi >/dev/null 2>&1
+wget http://updates.jenkins-ci.org/latest/git-client.hpi >/dev/null 2>&1
+wget http://updates.jenkins-ci.org/latest/git.hpi >/dev/null 2>&1
 
 echo "Starting Xvfb..."
 export DISPLAY=:10
@@ -41,5 +46,17 @@ nohup java -jar  /usr/local/bin/selenium-server-standalone.jar &
 
 echo "Starting Jenkins..."
 /etc/init.d/jenkins start
-#rm -rf /var/www
-#ln -fs /vagrant /var/www
+# The plugins directory might not exist. Wait for 30 seconds if it
+# doesn't exist
+#if [ ! -e /var/cache/jenkins/war/WEB-INF/plugins ];
+#then
+#    sleep 30
+#fi
+# Move the downloaded plugins (git, etc)
+sleep 60
+echo "Moving Jenkins plugins..."
+chown jenkins:jenkins *.hpi
+mv *.hpi /var/cache/jenkins/war/WEB-INF/plugins
+sleep 60
+/etc/init.d/jenkins restart
+
