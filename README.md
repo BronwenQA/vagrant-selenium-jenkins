@@ -10,7 +10,12 @@ If you point the browser on your host to http:localhost:8080 you will be able to
 To check that the Selenium driver is running, point your browser to http://localhost:4444/selenium-server/driver/?cmd=getLogMessages
 
 ## Tests
-TBD
+To test that everything is working, you can run the test in ExampleTest.php.
+* `vagrant ssh`
+* `phpunit --log-junit report.xml /vagrant/ExampleTest.php`
+
+If your box is correctly provisioned, you should see:
+`OK (1 test, 1 assertion)`
 
 ## License
 Apache2
