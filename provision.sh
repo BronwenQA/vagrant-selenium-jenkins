@@ -53,3 +53,7 @@ chown jenkins:jenkins *.hpi
 mv *.hpi /var/cache/jenkins/war/WEB-INF/plugins
 /etc/init.d/jenkins restart
 
+# Overwrite rc.local so that we start Selenium, etc. on boot
+cp /vagrant/rc.local /etc/rc.local
+chown root:root /etc/rc.local
+

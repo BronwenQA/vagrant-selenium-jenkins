@@ -1,0 +1,13 @@
+#!/bin/sh -e
+echo "Starting Xvfb..."
+export DISPLAY=:10
+Xvfb :10 -screen 0 1024x768x8 -ac &
+
+echo "Starting Firefox..."
+firefox &
+
+echo "Starting Selenium..."
+nohup java -jar  /usr/local/bin/selenium-server-standalone.jar &
+
+exit 0
+
