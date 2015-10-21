@@ -23,6 +23,9 @@ mv selenium-server-standalone-2.47.1.jar /usr/local/bin/selenium-server-standalo
 echo "Installing git..."
 apt-get install -y git >/dev/null 2>&1
 
+echo "Installing LinkChecker"
+apt-get install -y LinkChecker >/dev/null 2>&1
+
 echo "Installing Jenkins..."
 wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
 sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
