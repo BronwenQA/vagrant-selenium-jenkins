@@ -8,9 +8,11 @@ apt-get install -y php5-cli >/dev/null 2>&1
 apt-get install -y php5-curl >/dev/null 2>&1
 
 echo "Installing PHPUnit..."
-wget https://phar.phpunit.de/phpunit.phar >/dev/null 2>&1
-chmod +x phpunit.phar >/dev/null 2>&1
-mv phpunit.phar /usr/local/bin/phpunit 
+# We need the "old" phpunit since Ubuntu 14.04 supports PHP 5.5
+# and the "new" phpunit needs PHP 5.6
+wget https://phar.phpunit.de/phpunit-old.phar >/dev/null 2>&1
+chmod +x phpunit-old.phar >/dev/null 2>&1
+mv phpunit-old.phar /usr/local/bin/phpunit 
 
 # Using instructions from http://pietervogelaar.nl/ubuntu-14-04-install-selenium-as-service-headless
 echo "Installing Firefox and xvfb"
